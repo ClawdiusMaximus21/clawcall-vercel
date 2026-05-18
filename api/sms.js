@@ -1,8 +1,6 @@
 /**
  * Twilio SMS Webhook Handler — Vercel Serverless
  * Receives inbound SMS to +13853308222
- * 
- * Twilio → POST /api/sms → Overseer responds via Clawdius
  */
 
 module.exports = async function handler(req, res) {
@@ -13,11 +11,10 @@ module.exports = async function handler(req, res) {
 
     console.log(`[sms] From ${from} to ${to}: ${body}`);
 
-    // Twilio expects TwiML response
     res.setHeader('Content-Type', 'text/xml');
     res.status(200).send(`
       <Response>
-        <Message>Hi, this is Clawdius, Seth's digital assistant. I've received your message and will pass it along to Seth. Is there something specific I can help you with?</Message>
+        <Message>Hi, this is Clawdius, Seth's digital assistant. I've received your message and will pass it along to Seth. Is there something specific I can help you with? You can also call +13853308222 to reach Seth directly.</Message>
       </Response>
     `);
   } catch (err) {
