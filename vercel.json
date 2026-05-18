@@ -4,6 +4,10 @@
     {
       "src": "api/**/*.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "twilio/**/*.js",
+      "use": "@vercel/node"
     }
   ]
 }
