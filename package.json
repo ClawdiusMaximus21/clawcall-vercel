@@ -1,0 +1,12 @@
+{
+  "name": "clawcall-vercel",
+  "version": "1.0.0",
+  "description": "Twilio call forwarding to Asterisk via Vercel",
+  "main": "api/voice.js",
+  "scripts": {
+    "start": "node api/voice.js"
+  },
+  "dependencies": {
+    "twilio": "^5.0.0"
+  }
+}
