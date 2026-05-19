@@ -1,12 +1,10 @@
 /**
  * Twilio Voice Webhook Handler
- * Receives incoming calls to +13853308222
  */
 
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
-const BYPASS = '514ad9f082ef37caac3e0f835da30d0e';
-const BASE = 'https://clawcall-vercel-9gnjpftfx-seth-s-projects21.vercel.app';
+const BASE = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://clawcall-vercel2.vercel.app';
 
 function getGreeting() {
   const h = new Date().getHours();
@@ -23,7 +21,7 @@ module.exports = async function handler(req, res) {
       numDigits: 1,
       timeout: 30,
       method: 'POST',
-      action: `${BASE}/twilio/gather?x-vercel-protection-bypass=${BYPASS}`,
+      action: `${BASE}/twilio/gather`,
     });
     res.status(200).send(twiml.toString());
   } catch (err) {
