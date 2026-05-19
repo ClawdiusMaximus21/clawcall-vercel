@@ -6,8 +6,18 @@
       "use": "@vercel/node"
     },
     {
-      "src": "twilio/**/*.js",
+      "src": "twilio/**/*.js", 
       "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/twilio/(.*)",
+      "dest": "/twilio/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     }
   ]
 }
