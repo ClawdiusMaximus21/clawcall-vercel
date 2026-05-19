@@ -1,26 +1,17 @@
 /**
  * Twilio Voice Gather Handler
+ * Redirects to /twilio/process for speech recognition routing.
  */
 
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
+const BASE = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://clawcall-vercel2.vercel.app';
+
 module.exports = async function handler(req, res) {
   res.setHeader('Content-Type', 'text/xml');
   try {
-    const from = req.body?.From || 'unknown';
-    console.log(`[gather] From ${from}`);
-
     const twiml = new VoiceResponse();
-    twiml.say({ voice: 'alice', language: 'en-US' },
-      "Let me connect you with Seth. Please hold for a moment.");
-    twiml.pause({ length: 1 });
-
-    const dial = twiml.dial({
-      callerId: '+13853308222',
-      timeout: 30,
-    });
-    dial.number('+18014204625');
-
+    twiml.redirect({ method: 'POST' }, `${BASE}/twilio/process`);
     res.status(200).send(twiml.toString());
   } catch (err) {
     console.error('[gather]', err);
